@@ -1,0 +1,52 @@
+<div class="player-wrap">
+
+    <!-- Background Video Layer -->
+    <video #videoPlayer class="video-bg" playsinline autoplay muted></video>
+
+    <!-- Gradient overlay -->
+    <div class="gradient"></div>
+
+    <!-- Buffering Spinner -->
+    <div class="buffering-overlay" *ngIf="isBuffering()">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Featured Info -->
+    <div class="info">
+        <span class="badge">Live IPTV</span>
+        <h1 class="title">{{ iptvService.selectedChannel()?.name || 'XPlayer Stream' }}</h1>
+        <p class="desc" *ngIf="!iptvService.selectedChannel()">
+            Loading channels from the global IPTV network...
+        </p>
+        <p class="desc" *ngIf="iptvService.selectedChannel()">
+            {{ iptvService.selectedChannel()?.group }}
+            <span *ngIf="iptvService.selectedChannel()?.country">
+                · {{ iptvService.selectedChannel()?.country }}
+            </span>
+        </p>
+        <div class="info-actions" *ngIf="iptvService.selectedChannel()">
+            <button class="btn-play" (click)="togglePlay()">
+                {{ isPlaying() ? '⏸ Pause' : '▶ Watch Now' }}
+            </button>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+        <div class="progress" (click)="seek($event)">
+            <div class="progress-inner" [style.width.%]="progress()"></div>
+        </div>
+        <div class="ctrl-row">
+            <div class="ctrl-left">
+                <button class="ctrl-btn circle" (click)="togglePlay()">{{ isPlaying() ? '⏸' : '▶' }}</button>
+                <span class="time">{{ currentTime() }} / {{ duration() }}</span>
+                <span class="live-badge" *ngIf="isLive()">● LIVE</span>
+            </div>
+            <div class="ctrl-right">
+                <button class="ctrl-btn" (click)="toggleMute()">{{ isMuted() ? '🔇' : '🔊' }}</button>
+                <button class="ctrl-btn" (click)="toggleFullscreen()">⛶</button>
+            </div>
+        </div>
+    </div>
+
+</div>

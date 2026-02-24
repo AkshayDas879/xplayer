@@ -1,0 +1,218 @@
+:host {
+    display: block;
+    width: 100%;
+}
+
+.player-wrap {
+    width: 100%;
+    min-height: 520px;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    background: #080808;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+/* Background Video */
+.video-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+/* Gradient */
+.gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top,
+            rgba(5, 5, 5, 1) 0%,
+            rgba(5, 5, 5, 0.6) 35%,
+            rgba(5, 5, 5, 0.1) 70%,
+            transparent 100%);
+    z-index: 1;
+}
+
+/* Featured Info */
+.info {
+    position: relative;
+    z-index: 2;
+    padding: 2.5rem 2.5rem 1rem;
+}
+
+.badge {
+    display: inline-block;
+    background: var(--primary-color);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+    background: linear-gradient(to right, #fff 60%, rgba(255, 255, 255, 0.5));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 480px;
+    margin-bottom: 1.5rem;
+}
+
+.info-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-play {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: #fff;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: var(--font-family);
+    transition: var(--transition-smooth);
+    letter-spacing: 0.3px;
+}
+
+.btn-play:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px -6px rgba(59, 130, 246, 0.55);
+}
+
+/* Controls Bar */
+.controls {
+    position: relative;
+    z-index: 2;
+    padding: 0 1.5rem 1.25rem;
+}
+
+.progress {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 2px;
+    margin-bottom: 0.875rem;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.progress-inner {
+    height: 100%;
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    border-radius: 2px;
+    transition: width 0.15s linear;
+}
+
+.ctrl-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ctrl-left,
+.ctrl-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.ctrl-btn {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    cursor: pointer;
+    opacity: 0.75;
+    padding: 0.25rem;
+    border-radius: 6px;
+    font-family: var(--font-family);
+    transition: var(--transition-smooth);
+}
+
+.ctrl-btn:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.ctrl-btn.circle {
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    opacity: 1;
+    padding-left: 3px;
+}
+
+.ctrl-btn.circle:hover {
+    background: var(--primary-color);
+}
+
+.time {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+}
+
+.live-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #ef4444;
+    letter-spacing: 0.5px;
+    padding: 0.2rem 0.5rem;
+    background: rgba(239, 68, 68, 0.15);
+    border-radius: 4px;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Buffering Overlay */
+.buffering-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(2px);
+}
+
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid rgba(255, 255, 255, 0.15);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

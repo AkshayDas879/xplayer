@@ -1,0 +1,60 @@
+<aside class="sidebar">
+
+    <!-- Logo -->
+    <div class="logo">
+        <span class="x">X</span><span>PLAYER</span>
+    </div>
+
+    <!-- Search Box -->
+    <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" placeholder="Search channels..." (input)="onSearch($event)" />
+    </div>
+
+    <!-- Loading State -->
+    <div class="status-row" *ngIf="iptvService.isLoading()">
+        <div class="mini-spinner"></div>
+        <span>Loading channels…</span>
+    </div>
+
+    <!-- Error State -->
+    <div class="status-row error" *ngIf="iptvService.error()">
+        ⚠ {{ iptvService.error() }}
+    </div>
+
+    <!-- Channel Count -->
+    <div class="ch-count" *ngIf="!iptvService.isLoading() && iptvService.channels().length">
+        {{ filteredChannels().length }} / {{ iptvService.channels().length }} channels
+    </div>
+
+    <!-- Channel List -->
+    <div class="channel-list">
+        <button *ngFor="let ch of filteredChannels(); trackBy: trackById" class="channel-item"
+            [class.active]="isSelected(ch)" (click)="selectChannel(ch)" [title]="ch.name">
+            <!-- Logo or Flag Fallback -->
+            <div class="ch-logo">
+                <img *ngIf="ch.logo" [src]="ch.logo" [alt]="ch.name" (error)="onLogoError($event)" class="ch-img" />
+                <span *ngIf="!ch.logo" class="ch-flag">{{ getFlagEmoji(ch.country) || '📺' }}</span>
+            </div>
+
+            <!-- Channel Info -->
+            <div class="ch-info">
+                <span class="ch-name">{{ ch.name }}</span>
+                <span class="ch-group">{{ ch.group }}</span>
+            </div>
+
+            <!-- Live Dot -->
+            <span class="live-dot" *ngIf="isSelected(ch)"></span>
+        </button>
+    </div>
+
+    <!-- Footer User -->
+    <div class="user">
+        <!-- <div class="avatar">U</div>
+        <div>
+            <p class="user-name">User Name</p>
+            <p class="user-role">Premium</p>
+        </div> -->
+    </div>
+
+</aside>
